@@ -8,36 +8,58 @@
 <body>
     <h1>Hello AI</h1>
     <p>Tool to ask questions to AI answer it</p>
+
     <h2>Ask your question here</h2>
-    <input type="text" id="prompt" placeholder="">
-    <button onclick="sendPromptToAI()">Send</button>
+
+    <input type="text" id="question" placeholder="">
+    <button id="btn" onclick="sendPromptToAI()">Send</button>
     <div id="response">[Response]</div>
 
     <script>
         async function sendPromptToAI() {
-            const prompt = document.getElementById('prompt').value;
-            const responseDiv = document.getElementById('response');
-            responseDiv.textContent = "generating an anwear, please wait";
+            const question = document.getElementById('question').value.trim();
+            const button = document.getElementById('btn');
+            const response = document.getElementById('response');
 
-            const apiKey = "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"; // Replace with your actual key
+            response.textContent = 'Generating...';
 
-            const res = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-            model: "gpt-5",
-            messages: [{ role: "user", content: prompt }]
-        })
-      });
-
-      const data = await res.json();
-      responseDiv.textContent = data.choices[0].message.content;
-    }
-
-  </script>
-
+            api_key="YOUR_API_KEY"
+            
+            try {
+                const result = await fetch('https://api-inference.huggingface.co/openai/gpt-oss-20b', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": 'application/json',
+                        "Authorization": `Bearer ${api_key}`
+                    },
+                    body: JSON.stringify({
+                        inputs: question,
+                        parameters: {
+                            max_new_tokens: 100,
+                            temperature: 0.7
+                        }
+                    })
+                });
+                
+                const data = await result.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                if (answer.includes(question)) {
+                    answer = answer.replace(question, '').trim();
+                }
+                
+                response.textContent = answer || 'Sorry, I could not generate a response.';
+                response.className = '';
+                
+            } catch (error) {
+                response.textContent = 'Error: ' + error.message;
+                response.className = '';
+            }
+        }
+        
+    </script>
 </body>
 </html>
