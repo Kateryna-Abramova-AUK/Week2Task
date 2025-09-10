@@ -9,5 +9,4 @@ A minimal HTML+JS app that sends a prompt to OpenAI and displays the response.
 3. Type a prompt and click "Send".
 
 ## 🌍 Live Demo
-
 🔗 [Live Demo](https://your-demo-link.com)
