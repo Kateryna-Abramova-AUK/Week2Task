@@ -9,11 +9,13 @@ First, we do (shown below) to create and export the API key:
 **setx OPENAI_API_KEY "your_api_key_here"**
 
 Then we install OpenAI:
+
 **pip install openai**
 
 Next, we implement the code shown in _example.py_
 
 Finally, to configure in the terminal, we run:
+
 **python example.py**
 
 2. Integrated into web
