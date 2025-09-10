@@ -18,45 +18,32 @@
     <script>
         async function sendPromptToAI() {
             const question = document.getElementById('question').value.trim();
-            const button = document.getElementById('btn');
             const response = document.getElementById('response');
 
             response.textContent = 'Generating...';
 
             api_key="YOUR_API_KEY"
-            
+
             try {
-                const result = await fetch('https://api-inference.huggingface.co/openai/gpt-oss-20b', {
+                const result = await fetch('https://api.openai.com/v1/chat/completions', {
                     method: 'POST',
                     headers: {
                         "Content-Type": 'application/json',
                         "Authorization": `Bearer ${api_key}`
                     },
                     body: JSON.stringify({
-                        inputs: question,
-                        parameters: {
-                            max_new_tokens: 100,
-                            temperature: 0.7
-                        }
+                        model: "gpt-3.5-turbo",
+                        messages: [{ role: "user", content: question }]
                     })
                 });
                 
                 const data = await result.json();
-                
                 if (data.error) {
                     throw new Error(data.error);
                 }
-                
-                if (answer.includes(question)) {
-                    answer = answer.replace(question, '').trim();
-                }
-                
-                response.textContent = answer || 'Sorry, I could not generate a response.';
-                response.className = '';
-                
-            } catch (error) {
-                response.textContent = 'Error: ' + error.message;
-                response.className = '';
+                response.textContent = data.choices[0].message.content;
+            } catch (err) {
+                response.textContent = "Error: " + err.message;
             }
         }
         
