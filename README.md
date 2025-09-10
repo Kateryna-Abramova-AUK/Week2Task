@@ -5,7 +5,8 @@ In this project, there are two approaches to take.
 1. Hardcoded via Python.
    
 First, we do (shown below) to create and export the API key:
-**setx OPENAI_API_KEY "your_api_key_here"  **
+
+**setx OPENAI_API_KEY "your_api_key_here"**
 
 Then we install OpenAI:
 **pip install openai**
