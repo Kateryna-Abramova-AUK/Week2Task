@@ -3,50 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello AI</title>
+    <title>Hello AI - LLM API Demo</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <h1>Hello AI</h1>
-    <p>Tool to ask questions to AI answer it</p>
-
-    <h2>Ask your question here</h2>
-
-    <input type="text" id="question" placeholder="">
-    <button id="btn" onclick="sendPromptToAI()">Send</button>
-    <div id="response">[Response]</div>
-
-    <script>
-        async function sendPromptToAI() {
-            const question = document.getElementById('question').value.trim();
-            const response = document.getElementById('response');
-
-            response.textContent = 'Generating...';
-
-            api_key="YOUR_API_KEY"
-
-            try {
-                const result = await fetch('https://api.openai.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": 'application/json',
-                        "Authorization": `Bearer ${api_key}`
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
-                        messages: [{ role: "user", content: question }]
-                    })
-                });
-                
-                const data = await result.json();
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-                response.textContent = data.choices[0].message.content;
-            } catch (err) {
-                response.textContent = "Error: " + err.message;
-            }
-        }
+    <div class="container">
+        <header class="app-header">
+            <h1>Hello AI</h1>
+            <p class="subtitle">Send a prompt to an LLM API and get a response</p>
+        </header>
         
-    </script>
+        <main class="main-content">
+            <section class="api-key-section">
+                <div class="input-group">
+                    <label for="api-key">API Key Status:</label>
+                    <div id="api-key-status" class="api-key-status">
+                        <span class="status-free">Using Free Tier</span>
+                        <small>Add your API key in config.js for better performance</small>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="prompt">Your Prompt:</label>
+                    <textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+                </div>
+                
+                <button id="submit-btn" class="submit-button">Send to AI</button>
+            </section>
+            
+            <section class="response-section">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Waiting for AI response...</p>
+                </div>
+                
+                <div class="error" id="error"></div>
+                
+                <div class="response-container">
+                    <h3 class="response-title">AI Response:</h3>
+                    <div id="response" class="response-content">Your response will appear here...</div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="app-footer">
+            <div class="api-info">
+                <p>Current model: <strong id="current-model">mistralai/mistral-7b-instruct:free</strong></p>
+                <p>API Key: <strong id="key-type">Free Tier</strong></p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Load config first, then other scripts -->
+    <script src="config.js"></script>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
