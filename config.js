@@ -2,7 +2,7 @@
 // ⚠️ WARNING: This file contains sensitive information. Add it to .gitignore!
 
 const CONFIG = {
-    OPENROUTER_API_KEY: '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', // Default to free tier
+    OPENROUTER_API_KEY: 'sk-or-v1-...', // Default to free tier
     // Replace 'free' with your actual API key: 'sk-or-v1-...'
     
     API_SETTINGS: {
