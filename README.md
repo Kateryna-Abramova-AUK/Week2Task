@@ -2,14 +2,10 @@
 
 A minimal web application that sends prompts to an LLM API and displays responses using OpenRouter's AI models.
 
-![Hello AI Demo](https://img.shields.io/badge/Status-Live-brightgreen) 
-![OpenRouter](https://img.shields.io/badge/Powered%20by-OpenRouter-blue) 
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow) 
-![HTML5](https://img.shields.io/badge/HTML5-Latest-orange) ![CSS3](https://img.shields.io/badge/CSS3-Styled-blueviolet)
 
 ## 🚀 Live Demo
 
-[Try the Live Demo Here](https://your-demo-link.com) *[Note: Add your actual demo link here]*
+[Try the Live Demo Here](https://kateryna-abramova-auk.github.io/Week2Task/) 
 
 ## 📁 Project Structure
 
